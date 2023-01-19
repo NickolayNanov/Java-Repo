@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Car</title>
+
+  <link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet"/>
+  <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+          data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/list-cars">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/register">Register</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container text-center">
+  <div>
+    <h1>Create a new Car</h1>
+  </div>
+
+  <form th:action="@{/editCar}" th:object="${carToEdit}"
+        method="post" style="max-width: 600px; margin: 0 auto;">
+    <div class="m-3">
+      <div class="form-group row">
+        <label class="col-4 col-form-label">Make: </label>
+        <div class="col-8">
+          <input th:field="*{make}" class="form-control" required />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label">Model: </label>
+        <div class="col-8">
+          <input th:field="*{model}" class="form-control" required />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label">Horse Power: </label>
+        <div class="col-8">
+          <input type="number" th:field="*{horsePower}" class="form-control" required />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label">Price: </label>
+        <div class="col-8">
+          <input type="number" th:field="*{price}" class="form-control" required />
+        </div>
+      </div>
+
+      <div>
+        <button th:name="carId" th:value="${carToEdit.getId()}" type="submit" class="btn btn-primary">Edit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>

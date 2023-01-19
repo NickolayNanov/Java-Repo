@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>List Users</title>
+
+  <link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet"/>
+  <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cars">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/register">Register</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container text-center">
+  <div>
+    <form method="post" th:action="@{/logout}">
+      <p>
+        Welcome <b th:text="${username}"></b>
+      </p>
+      <input type="submit" value="Sign Out"/>
+    </form>
+  </div>
+
+  <div>
+    <h1>List of Cars</h1>
+    <form method="get" th:action="@{/createCar}">
+      <input type="submit" value="Create new car"/>
+    </form>
+  </div>
+
+  <div>
+    <table class="table table-striped table-bordered">
+      <thead class="thead-light">
+      <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Horse Power</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="car: ${carList}">
+        <td th:text="${car.getMake()}">Make</td>
+        <td th:text="${car.getMake()}">Model</td>
+        <td th:text="${car.getHorsePower()}">Horse Power</td>
+        <td th:text="${car.getPrice()}">Price</td>
+        <td>
+          <div class="btn-group" role="group">
+            <form method="get" th:action="@{/editCar}"  th:object="${car.getId()}">
+              <button type="submit" th:name="carId" th:value="${car.getId()}" class="btn btn-secondary">Edit</button>
+            </form>
+
+            <form method="post" th:action="@{/deleteCar}" th:object="${car.getId()}">
+              <button th:name="carId" th:value="${car.getId()}" type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>
